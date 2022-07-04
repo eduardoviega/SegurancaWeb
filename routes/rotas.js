@@ -20,7 +20,7 @@ rotas.get("/remover/:id",controlador.montarReqDelete)  //monta requisição de r
 
 //autenticação
 rotas.get("/login", controladorUsuarios.mostrarFormLogin);
-// rotas.post("/login", controladorUsuarios.verificaLogin);
+rotas.post("/login/:email", controladorUsuarios.buscarUsuarioBanco);
 rotas.get("/cadastro", controladorUsuarios.mostrarFormCadastro);
 rotas.post("/cadastrar/usuario", controladorUsuarios.inserirUsuarioBanco);
 

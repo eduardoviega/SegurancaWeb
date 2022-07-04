@@ -2,15 +2,15 @@
 <form action="/ediReq/{{idComputador}}" method="post">
     <div class="mb-3">
         <label class="form-label">Descrição</label>
-        <input class="form-control" type="text" name="descricao" value="{{pcDescricao}}">
+        <input class="form-control" type="text" name="descricao" required="required" value="{{pcDescricao}}">
     </div>
     <div class="mb-3">
         <label class="form-label">Marca</label>
-        <input class="form-control" type="text" name="marca" value="{{pcMarca}}">
+        <input class="form-control" type="text" name="marca" required="required" value="{{pcMarca}}">
     </div>
     <div class="mb-3">
         <label class="form-label">Memória RAM</label>
-        <input class="form-control" type="text" name="memoriaRam" value="{{pcMemoriaRam}}">
+        <input class="form-control" type="text" name="memoriaRam" required="required" value="{{pcMemoriaRam}}">
     </div>
   
     <button type="submit" class="btn btn-primary">Atualizar</button>
