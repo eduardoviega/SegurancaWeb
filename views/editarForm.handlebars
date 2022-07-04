@@ -1,0 +1,19 @@
+<h2>Editando Computador com ID {{idComputador}}</h2>
+<form action="/ediReq/{{idComputador}}" method="post">
+    <div class="mb-3">
+        <label class="form-label">Descrição</label>
+        <input class="form-control" type="text" name="descricao" value="{{pcDescricao}}">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Marca</label>
+        <input class="form-control" type="text" name="marca" value="{{pcMarca}}">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Memória RAM</label>
+        <input class="form-control" type="text" name="memoriaRam" value="{{pcMemoriaRam}}">
+    </div>
+  
+    <button type="submit" class="btn btn-primary">Atualizar</button>
+    <a href="/"><button type="button" class="btn btn-danger">Voltar</button></a>
+    <br><br>
+</form>
