@@ -16,6 +16,10 @@ var usuario = banco.define("usuario",{
     senha: {
         type: sequelize.STRING(128),
         allowNull: false,
+    },
+    tipo: {
+        type: sequelize.INTEGER,
+        allowNull: false,
     }
 },{
     freezeTableName: true,

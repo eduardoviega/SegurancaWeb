@@ -45,7 +45,8 @@ usuarioControlador.inserirUsuarioBanco = async function (req, res) {
 
         usuario.create({
             email: req.body.email,
-            senha: pass
+            senha: pass,
+            tipo: req.body.tipo
         }).then(
             function(){
                 erros.push({texto: "Usuário cadastrado com sucesso!"})
