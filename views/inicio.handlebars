@@ -6,29 +6,33 @@
   <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.854 10.803a.5.5 0 1 1-.708-.707L9.243 6H6.475a.5.5 0 1 1 0-1h3.975a.5.5 0 0 1 .5.5v3.975a.5.5 0 1 1-1 0V6.707l-4.096 4.096z"/>
 </svg></a>-->
 
-
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Descrição</th>
-            <th scope="col">Marca</th>
-            <th scope="col">Memória RAM</th>
-        </tr>
-    </thead>
-    <tbody>
-        {{#each computadores}}
-        <tr>
-            <th>{{id}}</th>
-            <td>{{descricao}}</td>
-            <td>{{marca}}</td>
-            <td>{{memoriaRam}}</td>
-            <td>
-                <a href="/editar/{{id}}"><button type="submit" class="btn btn-warning">Editar</button></a>
-                <a href="/remover/{{id}}"><button type="submit" class="btn btn-danger">Apagar</button></a>
-            </td>
-        </tr>
-        {{/each}}
-    </tbody>
-</table>
- 
+<br>
+<br>
+<div class="card" style="margin-bottom: 100px;">
+    <div class="card-body">
+        <table class="table">
+            <thead  style="border-bottom-width: 1px; border-color: #000;">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Descrição</th>
+                    <th scope="col">Marca</th>
+                    <th scope="col">Memória RAM</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each computadores}}
+                <tr>
+                    <th>{{id}}</th>
+                    <td>{{descricao}}</td>
+                    <td>{{marca}}</td>
+                    <td>{{memoriaRam}}</td>
+                    <td style="text-align: right; border-bottom-width: 1px #000;">
+                        <a href="/editar/{{id}}"><button type="submit" class="btn btn-warning">Editar</button></a>
+                        <a href="/remover/{{id}}"><button type="submit" class="btn btn-danger">Apagar</button></a>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>
