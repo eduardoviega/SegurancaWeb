@@ -4,8 +4,6 @@ const { use } = require('../routes/rotas');
 
 const usuarioControlador = {};
 
-var listaUsuarios = []
-
 //métodos do handlebars
 usuarioControlador.mostrarFormLogin = function (req, res) {
     try {
@@ -14,7 +12,8 @@ usuarioControlador.mostrarFormLogin = function (req, res) {
         res.status(500).send("Erro ao acessar página de login: " + error);
     }
 };
-usuarioControlador.mostrarFormCadastro = function (req, res) {
+
+usuarioControlador.cadastro = function (req, res) {
     try {
         res.render("cadastroUsuario")
     } catch (error) {
@@ -23,36 +22,58 @@ usuarioControlador.mostrarFormCadastro = function (req, res) {
 };
 
 
-//CREATE
+//método para cadastrar o usuário no banco de dados
 usuarioControlador.inserirUsuarioBanco = async function (req, res) {
-    var password = await cripto.hash(req.body.senha,8)
-    usuario.create({
-        email: req.body.email,
-        senha: password
-    }).then(
-        function(){
-            res.status(200).redirect("/login");
-        }
-    ).catch(
-        function(error){
-            res.status(500).send("Erro ao criar usuário: " + error);
-        }
-    )
+    var erros = []
+
+    if(!req.body.email || typeof req.body.email == undefined || req.body.email == null){
+        erros.push({texto: "Email inválido"})
+    }
+
+    if(!req.body.senha || typeof req.body.senha == undefined || req.body.senha == null){
+        erros.push({texto: "Senha inválida"})
+    }
+
+    if(req.body.senha.length < 6){
+        erros.push({texto: "Senha muito pequena!"})
+    }
+
+    if(erros.length > 0){//se existe algum erro
+        res.render("cadastroUsuario",{errosNaPagina: erros})
+    }else{
+        var pass = await cripto.hash(req.body.senha,8)
+
+        usuario.create({
+            email: req.body.email,
+            senha: pass
+        }).then(
+            function(){
+                req.flash("success_msg", "Usuário cadastrado com sucesso!")
+                res.status(200).redirect("/login")
+            }
+        ).catch(
+            function(error){
+                req.flash("error_msg", "Erro ao cadastrar usuário!")
+                // res.status(500).send("Erro ao criar usuário: " + error)
+                res.redirect("/cadastro/usuario")
+            }
+        )
+    }
 }
 
 usuarioControlador.buscarUsuarioBanco = function(req,res){
-    usuario.findAll({
+    usuario.findOne({
         raw: true,
         where: {
-            email: req.params.email
+            email: req.body.email
         }
     }).then(
         function(user){
             cripto.compare(req.body.senha, user.senha).then(
                 function(result){
                     console.log(result)
-                    console.log("Autenticado com sucesso!")
                     if(result){
+                        req.flash("success_msg", "Login realizado com sucesso!")
                         res.status(200).redirect("/");
                     }else{
                         res.status(500).send("Erro nas credenciais ao logar!")
@@ -66,15 +87,9 @@ usuarioControlador.buscarUsuarioBanco = function(req,res){
         }
     ).catch(
         function(erro){
-            res.status(500).send(`Erro ao buscar o usuário: ${erro}`)
+            res.status(500).send(`Erro ao buscar email: ${erro}`)
         }
     )
 }
-
-usuarioControlador.verificaLogin = function (req, res) {
-    
-}
-    
-
 
 module.exports = usuarioControlador;

@@ -20,8 +20,8 @@ rotas.get("/remover/:id",controlador.montarReqDelete)  //monta requisição de r
 
 //autenticação
 rotas.get("/login", controladorUsuarios.mostrarFormLogin);
-rotas.post("/login/:email", controladorUsuarios.buscarUsuarioBanco);
-rotas.get("/cadastro", controladorUsuarios.mostrarFormCadastro);
 rotas.post("/cadastrar/usuario", controladorUsuarios.inserirUsuarioBanco);
+rotas.get("/cadastro/usuario", controladorUsuarios.cadastro);
+rotas.post("/logar", controladorUsuarios.buscarUsuarioBanco);
 
 module.exports = rotas;
