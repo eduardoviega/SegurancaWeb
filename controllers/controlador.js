@@ -42,6 +42,8 @@ computadorControlador.buscarComputadoresBanco = function(req,res){
 
 //UPDATE
 computadorControlador.atualizarComputadorBanco = function (req, res) {
+    erros = []
+    
     computador.update({
         descricao: req.body.descricao,
         marca: req.body.marca,

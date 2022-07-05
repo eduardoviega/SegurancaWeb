@@ -48,20 +48,26 @@ usuarioControlador.inserirUsuarioBanco = async function (req, res) {
             senha: pass
         }).then(
             function(){
-                req.flash("success_msg", "Usuário cadastrado com sucesso!")
-                res.status(200).redirect("/login")
+                erros.push({texto: "Usuário cadastrado com sucesso!"})
+                res.render("login",{validaNaPagina: erros})
+                // req.flash("success_msg", "Usuário cadastrado com sucesso!")
+                // res.status(200).redirect("/login")
             }
         ).catch(
             function(error){
-                req.flash("error_msg", "Erro ao cadastrar usuário!")
+                erros.push({texto: "Erro ao cadastrar usuário!"})
+                res.render("cadastroUsuario",{errosNaPagina: erros})
+                // req.flash("error_msg", "Erro ao cadastrar usuário!")
                 // res.status(500).send("Erro ao criar usuário: " + error)
-                res.redirect("/cadastro/usuario")
+                // res.redirect("/cadastro/usuario")
             }
         )
     }
 }
 
 usuarioControlador.buscarUsuarioBanco = function(req,res){
+    var erros = []
+
     usuario.findOne({
         raw: true,
         where: {
@@ -73,8 +79,10 @@ usuarioControlador.buscarUsuarioBanco = function(req,res){
                 function(result){
                     console.log(result)
                     if(result){
-                        req.flash("success_msg", "Login realizado com sucesso!")
+                        erros.push({texto: "Login realizado com sucesso!"})
+                        // res.render("inicio",{validaNaPagina: erros})
                         res.status(200).redirect("/");
+                        // req.flash("success_msg", "Login realizado com sucesso!")
                     }else{
                         res.status(500).send("Erro nas credenciais ao logar!")
                     }
