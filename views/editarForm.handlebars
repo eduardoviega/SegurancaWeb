@@ -1,16 +1,22 @@
+{{#each validaNaPagina}}
+    <div class="alert alert-danger">{{texto}}</div>
+{{else}}
+
+{{/each}}
+
 <h2>Editando Computador com ID {{idComputador}}</h2>
 <form action="/ediReq/{{idComputador}}" method="post">
     <div class="mb-3">
         <label class="form-label">Descrição</label>
-        <input class="form-control" type="text" name="descricao" required="required" value="{{pcDescricao}}">
+        <input class="form-control" type="text" name="descricao" required="required" maxlength="50" value="{{pcDescricao}}">
     </div>
     <div class="mb-3">
         <label class="form-label">Marca</label>
-        <input class="form-control" type="text" name="marca" required="required" value="{{pcMarca}}">
+        <input class="form-control" type="text" name="marca" required="required" maxlength="25" value="{{pcMarca}}">
     </div>
     <div class="mb-3">
         <label class="form-label">Memória RAM</label>
-        <input class="form-control" type="text" name="memoriaRam" required="required" value="{{pcMemoriaRam}}">
+        <input class="form-control" type="text" name="memoriaRam" required="required" maxlength="8" value="{{pcMemoriaRam}}">
     </div>
   
     <button type="submit" class="btn btn-primary">Atualizar</button>
