@@ -48,18 +48,18 @@ usuarioControlador.inserirUsuarioBanco = async function (req, res) {
             tipo: req.body.tipo
         }).then(
             function(){
-                erros.push({texto: "Usuário cadastrado com sucesso!"})
-                res.render("login",{validaNaPagina: erros})
-                // req.flash("success_msg", "Usuário cadastrado com sucesso!")
-                // res.status(200).redirect("/login")
+                // erros.push({texto: "Usuário cadastrado com sucesso!"})
+                // res.render("login",{validaNaPagina: erros})
+                req.flash("success_msg", "Usuário cadastrado com sucesso!")
+                res.status(200).redirect("/login")
             }
         ).catch(
             function(error){
-                erros.push({texto: "Erro ao cadastrar usuário!"})
-                res.render("cadastroUsuario",{errosNaPagina: erros})
-                // req.flash("error_msg", "Erro ao cadastrar usuário!")
+                // erros.push({texto: "Erro ao cadastrar usuário!"})
+                // res.render("cadastroUsuario",{errosNaPagina: erros})
                 // res.status(500).send("Erro ao criar usuário: " + error)
-                // res.redirect("/cadastro/usuario")
+                req.flash("error_msg", "Erro ao cadastrar usuário!")
+                res.redirect("/cadastro/usuario")
             }
         )
     }
