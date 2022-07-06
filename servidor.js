@@ -7,7 +7,7 @@ var flash = require("connect-flash")
 // require("./configs/security")(passport)
 
 var servidor = express()
-const PORTA = 3000
+const PORTA = 80
 
 servidor.use(session({
     secret: "aulanode",
