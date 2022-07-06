@@ -65,6 +65,7 @@ usuarioControlador.inserirUsuarioBanco = async function (req, res) {
     }
 }
 
+/* REFEITO COM PASSPORT
 usuarioControlador.buscarUsuarioBanco = function(req,res){
     var erros = []
 
@@ -98,6 +99,6 @@ usuarioControlador.buscarUsuarioBanco = function(req,res){
             res.status(500).send(`Erro ao buscar email: ${erro}`)
         }
     )
-}
+}*/
 
 module.exports = usuarioControlador;

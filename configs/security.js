@@ -1,35 +1,47 @@
 var localStrategy = require("passport-local").Strategy
-var banco = require("pg")
 var bcrypt = require("bcryptjs")
 
 //modelo do usuário
-var usuario = require('../models/usuario');
+var Usuario = require('../models/usuario');
 
 module.exports = function(passport){
-    passport.use(new localStrategy({usernameField:'email'},(email,senha,done) => {
 
-        usuario.findOne({email: email}).then((usuario) => {
-            if(!usuario){
+    passport.serializeUser((user,done)=>{
+        done(null, user.id)
+    })
+
+    passport.deserializeUser( async (id, done)=>{
+        try{
+            const user = await Usuario.findByPk(id)
+            done(null, user)
+        }catch(erro){
+            done(erro, user)
+        }
+    })
+    
+    passport.use(new localStrategy({
+        usernameField: 'email',
+        passwordField: 'senha'
+    },
+    async (email,senha,done) => {
+        try{
+            const user = await Usuario.findOne({
+                raw: true,
+                where: {
+                    email: email
+                }})
+                
+            if(!user){
                 return done(null,false,{message:"Esta conta não existe"})
             }
+            
+            const eValido = await bcrypt.compare(senha, user.senha)
 
-            bcrypt.compare(senha, usuario.senha, (erro, batem) => {
-                if(batem){
-                    return done(null, user)
-                }else{
-                    return done(null, false, {message: "Senha incorreta!"})
-                }
-            })
-        })
+            if(!eValido) return done(null, false, {message: "Senha incorreta!"})
+            
+            return done(null, user)
+        }catch(erro){
+            done(erro, false)
+        }
     }))
-
-    passport.serializeUser((usuario,done)=>{
-        done(null, usuario.id)
-    })
-
-    passport.deserializeUser((id, done)=>{
-        User.findById(id, (err, usuario) =>{
-            done(err, user)
-        })
-    })
 }

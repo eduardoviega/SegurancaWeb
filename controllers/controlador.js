@@ -240,7 +240,8 @@ computadorControlador.montarReqEdicao = function (req, res) {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             proxy:{
-                host: "54.207.99.25",
+                // host: "54.207.99.25",
+                host: "localhost",
                 port: 80
             }
         }
@@ -256,7 +257,8 @@ computadorControlador.montarReqEdicao = function (req, res) {
 computadorControlador.montarReqDelete = function (req, res) {
     axios.delete('/' + req.params.id,{
         proxy:{
-            host: "54.207.99.25",
+            // host: "54.207.99.25",
+            host: "localhost",
             port: 80
         }
     }).then(function () {
