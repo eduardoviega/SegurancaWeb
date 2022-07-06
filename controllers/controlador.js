@@ -4,7 +4,7 @@ var qs = require("querystring")
 
 const computadorControlador = {};
 
-var listaComputadores = []
+// var listaComputadores = []
 
 //CREATE
 computadorControlador.inserirComputadorBanco = function (req, res) {
@@ -22,7 +22,6 @@ computadorControlador.inserirComputadorBanco = function (req, res) {
         }
     )
 }
-
 
 //READ
 computadorControlador.buscarComputadoresBanco = function(req,res){
@@ -80,7 +79,6 @@ computadorControlador.removerComputadorBanco = function (req, res) {
         }
     )
 }
-
 
 //CÓDIGOS UTILIZADOS NA LISTA
 
@@ -194,7 +192,6 @@ computadorControlador.apagar = function (req, res) {
 };
 */
 
-
 //métodos do handlebars
 computadorControlador.cadastro = function (req, res) {
     try {
@@ -240,8 +237,8 @@ computadorControlador.montarReqEdicao = function (req, res) {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             proxy:{
-                // host: "54.207.99.25",
-                host: "localhost",
+                host: "54.207.99.25",
+                // host: "localhost",
                 port: 80
             }
         }
@@ -257,8 +254,8 @@ computadorControlador.montarReqEdicao = function (req, res) {
 computadorControlador.montarReqDelete = function (req, res) {
     axios.delete('/' + req.params.id,{
         proxy:{
-            // host: "54.207.99.25",
-            host: "localhost",
+            host: "54.207.99.25",
+            // host: "localhost",
             port: 80
         }
     }).then(function () {
@@ -268,8 +265,5 @@ computadorControlador.montarReqDelete = function (req, res) {
             res.status(500).send("Erro ao apagar um computador: " + err);
         })
 }
-
-
-
 
 module.exports = computadorControlador;
