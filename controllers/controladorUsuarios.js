@@ -1,6 +1,5 @@
 var usuario = require('../models/usuario');
 var cripto = require("bcryptjs");
-const { use } = require('../routes/rotas');
 
 const usuarioControlador = {};
 
