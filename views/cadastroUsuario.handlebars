@@ -1,5 +1,7 @@
 {{#each errosNaPagina}}
-    <div class="alert alert-danger">{{texto}}</div>
+    <div class="alert alert-danger alert-dismissible">{{texto}}
+        <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    </div>  
 {{else}}
 
 {{/each}}
